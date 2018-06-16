@@ -5,7 +5,7 @@ Spyder Editor
 This is a temporary script file.
 """
 import pandas as pd
-import quandl, math
+import Quandl, math
 import numpy as np
 from sklearn import preprocessing, cross_validation, svm
 from sklearn.linear_model import LinearRegression

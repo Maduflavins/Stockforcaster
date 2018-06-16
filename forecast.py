@@ -12,6 +12,7 @@ from sklearn.linear_model import LinearRegression
 import matplotlib.pyplot as plt
 from matplotlib import style
 style.use('ggplot')
+import pickle
 
 df = quandl.get("WIKI/GOOGL")
 
@@ -49,15 +50,20 @@ X_lately = X[-forcast_out:]
 df.dropna(inplace=True)
 
 y = np.array(df['label'])
-y = np.array(df['label'])
 
 #Create train and test
 X_train, X_test, y_train, y_test = cross_validation.train_test_split(X, y, test_size=0.2)
 
 #find the classifier
 
-clf = LinearRegression()
+clf = LinearRegression(n_jobs=-1)
 clf.fit(X_train, y_train)
+with open('LinearRegression.pickle', 'wb') as f:
+    pickle.dump(clf, f)
+pickle_in = open('LinearRegression.pickle', 'rb')
+
+clf = pickle.load(pickle_in)
+
 accuracy = clf.score(X_test, y_test)
 #print(accuracy)
 
